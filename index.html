@@ -1,39 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modern Registration Form</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Registration & Login Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+            padding: 20px;
+        }
+
+        .form-wrapper {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .form-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .student-info {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .input-field {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .input-field label {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #999;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-field input:focus,
+        .input-field input:not(:placeholder-shown) {
+            border-color: #9b59b6;
+        }
+
+        .input-field input:focus + label,
+        .input-field input:not(:placeholder-shown) + label {
+            top: 0;
+            left: 10px;
+            background: white;
+            padding: 0 5px;
+            font-size: 12px;
+            color: #9b59b6;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: #9b59b6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #8e44ad;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .footer-text a {
+            color: #9b59b6;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <div class="form-wrapper">
-    <div class="form-card">
-      <h2>Create Account</h2>
-      <P>STUDENT NAME: JAPHETH KWAME ALATEVI </P>
-      <P>STUDENT ID: 1693219663</P>
-      <form>
-        <div class="input-field">
-          <input type="text" id="username" name="username" placeholder=" " required>
-          <label for="username">Username</label>
+    <div class="form-wrapper">
+        <!-- Registration Form -->
+        <div class="form-card" id="registerForm">
+            <h2>Create Account</h2>
+            <div class="student-info">
+                <p>STUDENT NAME: JAPHETH KWAME ALATEVI</p>
+                <p>STUDENT ID: 1693219663</p>
+            </div>
+            <form onsubmit="return handleRegister(event)">
+                <div class="input-field">
+                    <input type="text" id="username" name="username" placeholder=" " required>
+                    <label for="username">Username</label>
+                </div>
+                <div class="input-field">
+                    <input type="email" id="email" name="email" placeholder=" " required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="password" name="password" placeholder=" " required>
+                    <label for="password">Password</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder=" " required>
+                    <label for="confirm-password">Confirm Password</label>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            <p class="footer-text">Already have an account? <a onclick="toggleForms()">Log in</a></p>
         </div>
-        <div class="input-field">
-          <input type="email" id="email" name="email" placeholder=" " required>
-          <label for="email">Email</label>
+
+        <!-- Login Form -->
+        <div class="form-card hidden" id="loginForm">
+            <h2>Welcome Back</h2>
+            <div class="student-info">
+                <p>STUDENT NAME: JAPHETH KWAME ALATEVI</p>
+                <p>STUDENT ID: 1693219663</p>
+            </div>
+            <form onsubmit="return handleLogin(event)">
+                <div class="input-field">
+                    <input type="email" id="login-email" name="login-email" placeholder=" " required>
+                    <label for="login-email">Email</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" id="login-password" name="login-password" placeholder=" " required>
+                    <label for="login-password">Password</label>
+                </div>
+                <button type="submit" class="btn">Log In</button>
+            </form>
+            <p class="footer-text">Don't have an account? <a onclick="toggleForms()">Sign up</a></p>
         </div>
-        <div class="input-field">
-          <input type="password" id="password" name="password" placeholder=" " required>
-          <label for="password">Password</label>
-        </div>
-        <div class="input-field">
-          <input type="password" id="confirm-password" name="confirm-password" placeholder=" " required>
-          <label for="confirm-password">Confirm Password</label>
-        </div>
-        <button type="submit" class="btn">Sign Up</button>
-      </form>
-      <p class="footer-text">Already have an account? <a href="#">Log in</a></p>
-      
     </div>
-  </div>
+
+    <script>
+        function toggleForms() {
+            const registerForm = document.getElementById('registerForm');
+            const loginForm = document.getElementById('loginForm');
+            
+            registerForm.classList.toggle('hidden');
+            loginForm.classList.toggle('hidden');
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return false;
+            }
+
+            // Here you would typically send the data to a server
+            console.log('Registration submitted:', { username, email });
+            alert('Registration successful!');
+            return false;
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            // Here you would typically verify credentials with a server
+            console.log('Login attempted:', { email });
+            alert('Login successful!');
+            return false;
+        }
+    </script>
 </body>
 </html>
